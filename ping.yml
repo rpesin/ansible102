@@ -1,0 +1,6 @@
+---
+- name: Ping all the hosts
+  hosts: all
+  tasks:
+    - name: Do the ping
+      ping:

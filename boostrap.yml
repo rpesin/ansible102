@@ -1,0 +1,23 @@
+---
+- name: Basic bootstrap steps for a managed node
+  hosts: all
+  remote_user: student
+  gather_facts: no
+
+  tasks:
+    - name: Create the ansible user
+      user:
+        name: ansible
+        comment: Ansible Config Autoamtion Account
+
+    - name: Push the student@workstation SSH key for ansible user account
+      authorized_key:
+        user: ansible
+        state: present
+        key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+
+    - name: Grant full passwordless sudo access to ansible user account
+      copy:
+        dest: /etc/sudoers.d/ansible
+        content: ansible ALL=(ALL) NOPASSWD:ALL
+
