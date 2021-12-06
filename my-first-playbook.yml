@@ -1,9 +1,0 @@
----
-- name: Restart rngd service
-  hosts: student06
-  tasks:
-    - name: Restart rngd
-      service:
-        name: rngd
-        enabled: yes
-        state: started
